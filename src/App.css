@@ -1,7 +1,7 @@
 .productList {
   /* background-color: rgb(181, 42, 42); */
   margin: 50px 0;
-  border-radius: 5px;
+  border-radius: 8px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-column-gap: 5rem;
@@ -11,7 +11,7 @@
 }
 
 .product {
-  background-color: #a78bfa;
+  background-color: #ddd6fe;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -32,4 +32,19 @@
   padding: 10px;
   display: flex;
   justify-content: space-between;
+}
+
+.btn {
+  outline: none;
+  border: none;
+  background-color: #ede9fe;
+  color: #6d28d9;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.primary {
+  background-color: #6d28d9;
+  color: #fff;
 }
