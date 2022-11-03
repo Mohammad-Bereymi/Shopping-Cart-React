@@ -22,10 +22,12 @@
 
 .mainNavigation li {
     margin: 0 1rem;
+    display: flex;
+
 }
 
 .mainNavigation a {
-    display: block;
+    display: inline-block;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -35,4 +37,23 @@
 .activeLink {
     color: #6d28d9;
     background-color: #fff;
+}
+
+.cartLink {
+    position: relative;
+}
+
+.mainNavigation span {
+    right: -9px;
+    top: -9px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #6d28d9;
+    color: #fff;
+    font-size: 14px;
 }
