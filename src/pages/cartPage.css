@@ -30,6 +30,8 @@
     border: 1px solid #ccc;
     width: 30%;
     margin-left: 3rem;
+    padding: 1rem;
+
 }
 
 .cartCenter {
@@ -40,3 +42,14 @@
     justify-content: center;
 }
 
+.summaryItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cartSummary hr{
+    height: 2px solid #ccc;
+    margin-bottom: 10px;
+}
