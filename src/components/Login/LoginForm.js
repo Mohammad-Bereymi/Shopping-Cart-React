@@ -6,6 +6,7 @@ import "./Login.css";
 import * as yup from "yup";
 import { useState } from "react";
 import { LoginUser } from "../../services/LoginService";
+import { useAuthActions } from "../../Providers/AuthProvider";
 const initialValues = {
   email: "",
   password: "",
@@ -26,10 +27,13 @@ const validationSchema = yup.object({
 });
 
 const LoginForm = ({ history }) => {
+  const setAuth = useAuthActions();
   const [error, setError] = useState(null);
   const onSubmit = async (values) => {
     try {
       const { data } = await LoginUser(values);
+      setAuth(data);
+      localStorage.setItem("authState", JSON.stringify(data));
       setError(null);
       history.push("/");
     } catch (error) {

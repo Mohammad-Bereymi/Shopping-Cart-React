@@ -9,20 +9,22 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
+import AuthProvider from "./Providers/AuthProvider";
 function App() {
   return (
     <Router>
-      <CartProvider>
-        <ToastContainer />
-        <Switch>
-          <Route path="/cart" component={CartPage} />
-          <Route path="/checkout" component={CheckOutPage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/signup" component={SignUpPage} />
-
-          <Route path="/" component={HomePage} />
-        </Switch>
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <ToastContainer />
+          <Switch>
+            <Route path="/cart" component={CartPage} />
+            <Route path="/checkout" component={CheckOutPage} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/signup" component={SignUpPage} />
+            <Route path="/" component={HomePage} />
+          </Switch>
+        </CartProvider>
+      </AuthProvider>
     </Router>
   );
 }
