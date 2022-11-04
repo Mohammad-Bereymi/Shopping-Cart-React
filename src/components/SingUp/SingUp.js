@@ -4,6 +4,8 @@ import "./SignUp.css";
 
 import * as yup from "yup";
 import { Link } from "react-router-dom";
+import { signupUser } from "../../services/SignupService";
+import { useState } from "react";
 const initialValues = {
   name: "",
   email: "",
@@ -38,10 +40,26 @@ const validationSchema = yup.object({
     .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 
-const onSubmit = (values) => {
-  console.log(values);
-};
 const SignUpForm = () => {
+  const [error, setError] = useState(null);
+  const onSubmit = async (values) => {
+    const { name, email, phoneNumber, password } = values;
+    const userData = {
+      name,
+      email,
+      phoneNumber,
+      password,
+    };
+    try {
+      const { data } = await signupUser(userData);
+      setError(null);
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      }
+    }
+  };
+
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -79,8 +97,9 @@ const SignUpForm = () => {
         >
           Signup
         </button>
+        {error && <p style={{ color: "red", margin: "15px 0" }}>{error}</p>}
         <Link to="/login">
-          <p style={{ marginTop: "15px" }}>Not Signup yet?</p>
+          <p style={{ marginTop: "15px" }}>Already Login?</p>
         </Link>
       </form>
     </div>

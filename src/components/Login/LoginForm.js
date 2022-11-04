@@ -1,8 +1,11 @@
 import { useFormik } from "formik";
 import Input from "../../common/Input";
+import { Link } from "react-router-dom";
 import "./Login.css";
 
 import * as yup from "yup";
+import { useState } from "react";
+import { LoginUser } from "../../services/LoginService";
 const initialValues = {
   email: "",
   password: "",
@@ -22,10 +25,18 @@ const validationSchema = yup.object({
     ),
 });
 
-const onSubmit = (values) => {
-  console.log(values);
-};
 const LoginForm = () => {
+  const [error, setError] = useState(null);
+  const onSubmit = async (values) => {
+    try {
+      const { data } = await LoginUser(values);
+      setError(null);
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      }
+    }
+  };
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -52,6 +63,11 @@ const LoginForm = () => {
         >
           Login
         </button>
+        {error && <p style={{ color: "red", margin: "15px 0" }}>{error}</p>}
+
+        <Link to="/signup">
+          <p style={{ marginTop: "15px" }}>Not Signup yet?</p>
+        </Link>
       </form>
     </div>
   );
