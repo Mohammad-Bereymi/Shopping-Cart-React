@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import Input from "../../common/Input";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./Login.css";
 
 import * as yup from "yup";
@@ -25,12 +25,13 @@ const validationSchema = yup.object({
     ),
 });
 
-const LoginForm = () => {
+const LoginForm = ({ history }) => {
   const [error, setError] = useState(null);
   const onSubmit = async (values) => {
     try {
       const { data } = await LoginUser(values);
       setError(null);
+      history.push("/");
     } catch (error) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
@@ -73,4 +74,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);
