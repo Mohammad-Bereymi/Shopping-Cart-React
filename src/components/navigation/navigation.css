@@ -4,11 +4,15 @@
     background-color: #ede9fe;
     position: sticky;
     top: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .mainNavigation nav {
     display: flex;
-    justify-content: center;
+    width: 100%;
+    max-width: 1170px;
+    justify-content: space-between;
     align-items: center;
     height: 100%;
 }
