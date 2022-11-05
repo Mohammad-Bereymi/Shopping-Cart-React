@@ -1,9 +1,10 @@
+import CheckOut from "../components/checkout/CheckOut";
 import Layout from "../Layout/Layout";
 
 const CheckOutPage = () => {
   return (
     <Layout>
-      <div>checkout page</div>
+      <CheckOut />
     </Layout>
   );
 };
