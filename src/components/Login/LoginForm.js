@@ -6,7 +6,7 @@ import useQuery from "../../hooks/useQuery";
 import * as yup from "yup";
 import { useState } from "react";
 import { LoginUser } from "../../services/LoginService";
-import { useAuthActions } from "../../Providers/AuthProvider";
+import { useAuth, useAuthActions } from "../../Providers/AuthProvider";
 const initialValues = {
   email: "",
   password: "",
@@ -30,7 +30,11 @@ const LoginForm = ({ history }) => {
   const setAuth = useAuthActions();
   const query = useQuery();
   const redirect = query.get("redirect") || "/";
+  const userData = useAuth();
   const [error, setError] = useState(null);
+  useEffect(() => {
+    if (userData) history.push(redirect);
+  }, [userData, redirect]);
   const onSubmit = async (values) => {
     try {
       const { data } = await LoginUser(values);
