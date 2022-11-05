@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import Input from "../../common/Input";
 import { Link, withRouter } from "react-router-dom";
 import "./Login.css";
-
+import useQuery from "../../hooks/useQuery";
 import * as yup from "yup";
 import { useState } from "react";
 import { LoginUser } from "../../services/LoginService";
@@ -28,6 +28,8 @@ const validationSchema = yup.object({
 
 const LoginForm = ({ history }) => {
   const setAuth = useAuthActions();
+  const query = useQuery();
+  const redirect = query.get("redirect") || "/";
   const [error, setError] = useState(null);
   const onSubmit = async (values) => {
     try {
@@ -35,7 +37,7 @@ const LoginForm = ({ history }) => {
       setAuth(data);
       localStorage.setItem("authState", JSON.stringify(data));
       setError(null);
-      history.push("/");
+      history.push(redirect);
     } catch (error) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
@@ -70,7 +72,7 @@ const LoginForm = ({ history }) => {
         </button>
         {error && <p style={{ color: "red", margin: "15px 0" }}>{error}</p>}
 
-        <Link to="/signup">
+        <Link to={`/login?redirect=${redirect}`}>
           <p style={{ marginTop: "15px" }}>Not Signup yet?</p>
         </Link>
       </form>
